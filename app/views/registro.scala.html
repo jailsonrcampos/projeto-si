@@ -1,0 +1,35 @@
+@(form: Form[Usuario], user: Usuario)
+
+@main("Registro | Portal Do Leite SI1 - UFCG", user) {
+
+   <div class="col-sm-8">
+   		<center>
+   		<br />
+   			<img src="/assets/images/login.jpg" class="img-responsive">
+   			<br />
+   			<blockquote>
+   			Faça seu registro para desfrutar de todo o conteúdo do portal e se dê bem na disciplina!
+   			</blockquote>
+   		</center>
+   </div>
+   <div class="col-sm-4">
+   @if(flash.contains("fail")) {
+		<div class="alert alert-dismissible alert-danger">
+  			<button type="button" class="close" data-dismiss="alert">×</button>
+  			@flash.get("fail")
+		</div>
+   }
+
+   @helper.form(routes.Registro.registrar) {
+   
+	   <h1 class="text-center">Registro</h1>
+	   <p><input type="text" name="nome" placeholder="Nome" value='@form("nome").value' class="form-control" required="required"></p>
+	   <p><input type="email" name="email" placeholder="Email" value='@form("email").value' class="form-control" required="required"></p>
+	   <p><input type="password" name="senha" placeholder="Senha (seis ou mais caracteres)" class="form-control" required="required"></p>
+	   <div>
+	       <button class="btn btn-primary btn-sm pull-right" type="submit">Registrar</button>
+	   </div>
+	   <p><b>Já registrado? Faça o <a href="/login"> Login.</a></b></p>
+	}
+    </div>
+}

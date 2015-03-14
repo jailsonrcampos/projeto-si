@@ -1,0 +1,35 @@
+@(form: Form[Usuario], user: Usuario)
+
+@main("Login | Portal Do Leite SI1 - UFCG", user) {
+
+   <div class="col-sm-8">
+   		<center>
+   		<br />
+   			<img src="/assets/images/login.jpg" class="img-responsive">
+   			<br />
+   			<blockquote>
+   			LEITES nada mais são do que relatórios, provas, manuais de soluções de livros (solucionários)
+   			 e tudo o que auxilia o estudante a se dar bem na disciplina SI 1, do curso de Computação da UFCG.
+   			</blockquote>
+   		</center>
+   </div>
+   <div class="col-sm-4">
+   @if(flash.contains("fail")) {
+   		<div class="alert alert-dismissible alert-danger">
+  			<button type="button" class="close" data-dismiss="alert">×</button>
+  			@flash.get("fail")
+		</div>
+   }
+   
+   @helper.form(routes.Login.autenticar) {
+   
+	   <h1 class="text-center">Login</h1>
+       <p><input type="email" name="email" placeholder="Email" value='@form("email").value' class="form-control" required="required"></p>
+       <p><input type="password" name="senha" placeholder="Senha" class="form-control" required="required"></p>
+       <div>
+	       <button class="btn btn-primary btn-sm pull-right" type="submit">Login</button>
+       </div>
+       <p><b>Não tem registro? <a href="/registrar">Registre-se agora!</a></b></p>
+	}
+    </div>
+}

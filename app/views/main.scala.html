@@ -1,0 +1,82 @@
+@(title: String, user: Usuario)(content: Html)
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap -->
+<link href="@routes.Assets.at("css/bootstrap.css")" rel="stylesheet">
+
+<link href="@routes.Assets.at("css/style.css")" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="@routes.Assets.at("js/html5shiv.min.js")"></script>
+  <script src="@routes.Assets.at("js/respond.min.js")"></script>
+<![endif]-->
+
+<title>@title</title>
+
+</head>
+<body>
+
+	<div class="navbar navbar-default navbar-fixed-top">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Navegação</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand logomarca" href="/"><img src="/assets/images/logo.png" class="img-responsive"></a>
+	    </div>
+	
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	
+	      </ul>
+	      @if(user != null) {
+		      <ul class="nav navbar-nav navbar-right">
+		      <li><img src="/assets/images/Icon-user.png" height="40" class="icon-user"></li>
+		      <li class="dropdown">
+		      	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Olá @user.getNome() <span class="caret"></span></a>
+		          <ul class="dropdown-menu" role="menu">
+		            <li><a href="/logout">Sair</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+	      }
+	    </div>
+	  </div>
+	</div>
+	
+	<div class="container conteudo">
+		<div class="row">
+			<div class="col-md-12">
+				@content
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<hr>
+				<p align="center">Portal do Leite da disciplina SI 1 - UFCG</p>
+			</div>
+		</div>
+	</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="@routes.Assets.at("js/jquery.min.js")"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+    
+    <script src="@routes.Assets.at("js/scripts.js")"></script>
+    	
+</body>
+</html>
