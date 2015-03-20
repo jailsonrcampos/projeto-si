@@ -9,6 +9,27 @@
 	margin-top: -15px;
 }
 
-.icon-user {
-	margin-top: 12px;
+.tema-capa {
+	width: 100%;
+	height: 170px;
+}
+
+.user-imagem {
+	margin-top: 90px;
+}
+
+.user-detalhes {
+	margin: 20px 20px 50px 20px;
+}
+
+.user-space {
+	margin-top: 160px;
+}
+
+.tema-default {
+	background-image: url("/assets/images/capa-default.jpg");
+}
+
+.tema-cidade {
+	background-image: url("/assets/images/capa-cidade.jpg");
 }

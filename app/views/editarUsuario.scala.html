@@ -1,0 +1,32 @@
+@(title: String, usuario: Usuario)
+
+@main(title) {
+
+   	<div class="col-xs-12 col-sm-8">
+	   
+	   @if(flash.contains("fail")) {
+	   		<div class="alert alert-dismissible alert-danger">
+	  			<button type="button" class="close" data-dismiss="alert">×</button>
+	  			@flash.get("fail")
+			</div>
+	   }
+	   @if(flash.contains("success")) {
+			<div class="alert alert-dismissible alert-success">
+	  			<button type="button" class="close" data-dismiss="alert">×</button>
+	  			@flash.get("success")
+			</div>
+	   }
+	
+		   	<form method="post">
+			   	<h1>Editar Perfil</h1>
+			   	<p><br /><label for="nome">Nome</label></p>
+		       	<p><input type="text" name="nome" placeholder="Nome" class="form-control" value="@usuario.getNome()" required="required"></p>
+		       	<p><br /><label for="sobre">Sobre Você</label></p>
+		       	<p><textarea name="sobre" rows="5" placeholder="Digite um resumo sobre você" class="form-control">@usuario.getSobreMim()</textarea></p>
+		       	<div>
+			    	<button class="btn btn-primary btn-sm pull-right" type="submit">Editar</button>
+		       	</div>
+		   	</form>
+
+    </div>
+}

@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import models.CriptografiaMD5;
 import models.Usuario;
 import models.dao.GenericDAO;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
@@ -26,60 +27,59 @@ public class Registro extends Controller {
 
 	@Transactional
     public static Result mostrarFormulario() {
-		if (session().get("usuario") != null) {
+		if (session().get("usuarioId") != null) {
 			return redirect("/");
 		}
-		return ok(registro.render(registroForm, null));
+		return ok(registro.render("Registro de Usuário | Portal do Leite SI1 - UFCG", registroForm));
     }
     
 	@Transactional
 	public static Result registrar() throws NoSuchAlgorithmException{
 		
+		DynamicForm requestData = Form.form().bindFromRequest();
 		Usuario usuarioRegistrar = registroForm.bindFromRequest().get();
     	
 		if (registroForm.hasErrors()) {
-			flash("fail", "Erro no preenchimento do formulário. Verifique os dados digitados e tente novamente.");
-            return ok(registro.render(registroForm, null));
+			flash("fail", "Erro no preenchimento do formulário! Verifique os dados digitados e tente novamente.");
+			return redirect("/registro");
         } 
 		
 		if (!validarEmail(usuarioRegistrar.getEmail())) {
-			flash("fail", "O email digitado não é um email válido.");
-            return ok(registro.render(registroForm, null));
+			flash("fail", "O email digitado não é um email válido!");
+			return redirect("/registro");
         } 
 		
 		if (!validarSenha(usuarioRegistrar.getSenha())) {
-			flash("fail", "A senha digitada não é uma senha válida.");
-            return ok(registro.render(registroForm, null));
+			flash("fail", "A senha digitada não é uma senha válida!");
+			return redirect("/registro");
+        }
+		
+		if (!usuarioRegistrar.getSenha().equals(requestData.get("senha2"))) {
+			flash("fail", "Os campos 'Senha' e 'Repetir Senha' não são iguais!");
+			return redirect("/registro");
         }
 		
 		if (!validarNome(usuarioRegistrar.getNome())) {
-			flash("fail", "O Nome digitado não é um nome válido.");
-            return ok(registro.render(registroForm, null));
+			flash("fail", "O Nome digitado não é um nome válido!");
+			return redirect("/registro");
         }
 		
 		if (hasEmailCadastrado(usuarioRegistrar.getEmail())) {
-			flash("fail", "O email já está em uso por outro usuário.");
-	        return ok(registro.render(registroForm, null));
+			flash("fail", "O email já está em uso por outro usuário!");
+			return redirect("/registro");
 	    }
 		
 		String senhaCriptografada = md5.criptografarSenha(usuarioRegistrar.getSenha());
 		usuarioRegistrar.setSenha(senhaCriptografada);
         dao.persist(usuarioRegistrar);
-        return redirect("/registrar/ok");
+        flash("success", "Registro realizado com sucesso! Agora você pode fazer o Login.");
+        return redirect("/login");
 
-    }
-	
-	@Transactional
-    public static Result registrado() {
-		if (session().get("usuario") != null) {
-			return redirect("/");
-		}
-		return ok(registrado.render("", null));
     }
 	
 	private static boolean hasEmailCadastrado(String email) {
 		List<Usuario> usuarios = dao.findByAttributeName("Usuario", "email", email);
-		if(usuarios.size() > 0) { 
+		if(usuarios != null && usuarios.size() > 0) { 
 			return true;
 		}
 		return false;

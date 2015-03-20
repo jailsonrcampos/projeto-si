@@ -19,6 +19,10 @@ public class Usuario {
 	private String email;
 	@Column
 	private String senha;
+	@Column
+	private String imagem;
+	@Column
+	private String sobreMim;
 	
 	public Usuario() {};
 	
@@ -50,6 +54,22 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
+	public String getSobreMim() {
+		return sobreMim;
+	}
+
+	public void setSobreMim(String sobreMim) {
+		this.sobreMim = sobreMim;
 	}
 
 	public long getId() {

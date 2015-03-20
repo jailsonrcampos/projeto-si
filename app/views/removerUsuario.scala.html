@@ -1,0 +1,33 @@
+@(title: String)
+
+@main(title) {
+
+   <div class="col-sm-8">
+   		<center>
+   		<br />
+   			<img src="/assets/images/atencao.jpg" width="200" class="img-responsive">
+   			<blockquote>
+   			<h3>Cuidado!</h3> Se você remover sua conta de usuário, todos os seus dados serão removidos permanentemente.
+   			</blockquote>
+   		</center>
+   </div>
+   <div class="col-sm-4">
+   
+   @if(flash.contains("fail")) {
+   		<div class="alert alert-dismissible alert-danger">
+  			<button type="button" class="close" data-dismiss="alert">×</button>
+  			@flash.get("fail")
+		</div>
+   }
+
+	   	<form method="post">
+		   	<h1 class="text-center">Remover Conta</h1>
+	       	<p><input type="password" name="senha" placeholder="Senha" class="form-control" required="required"></p>
+	       	<p><input type="password" name="senha2" placeholder="Repetir Senha" class="form-control" required="required"></p>
+	       	<div>
+		    	<button class="btn btn-primary btn-sm pull-right" type="submit">Remover</button>
+	       	</div>
+	   	</form>
+
+    </div>
+}

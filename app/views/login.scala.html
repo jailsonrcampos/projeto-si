@@ -1,6 +1,6 @@
-@(form: Form[Usuario], user: Usuario)
+@(title: String, form: Form[Usuario])
 
-@main("Login | Portal Do Leite SI1 - UFCG", user) {
+@main(title) {
 
    <div class="col-sm-8">
    		<center>
@@ -20,6 +20,12 @@
   			@flash.get("fail")
 		</div>
    }
+   @if(flash.contains("success")) {
+		<div class="alert alert-dismissible alert-success">
+  			<button type="button" class="close" data-dismiss="alert">×</button>
+  			@flash.get("success")
+		</div>
+   }
    
    @helper.form(routes.Login.autenticar) {
    
@@ -29,7 +35,8 @@
        <div>
 	       <button class="btn btn-primary btn-sm pull-right" type="submit">Login</button>
        </div>
-       <p><b>Não tem registro? <a href="/registrar">Registre-se agora!</a></b></p>
+       <p>Não tem registro? <b><a href="/registro"> Registre-se agora!</a></b><br />
+       	Perdeu a senha? <b><a href="/senha/nova"> Solicite uma nova!</a></b></p>
 	}
     </div>
 }

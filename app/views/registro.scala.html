@@ -1,6 +1,6 @@
-@(form: Form[Usuario], user: Usuario)
+@(title: String, form: Form[Usuario])
 
-@main("Registro | Portal Do Leite SI1 - UFCG", user) {
+@main(title) {
 
    <div class="col-sm-8">
    		<center>
@@ -26,10 +26,11 @@
 	   <p><input type="text" name="nome" placeholder="Nome" value='@form("nome").value' class="form-control" required="required"></p>
 	   <p><input type="email" name="email" placeholder="Email" value='@form("email").value' class="form-control" required="required"></p>
 	   <p><input type="password" name="senha" placeholder="Senha (seis ou mais caracteres)" class="form-control" required="required"></p>
+	   <p><input type="password" name="senha2" placeholder="Repetir Senha" class="form-control" required="required"></p>
 	   <div>
 	       <button class="btn btn-primary btn-sm pull-right" type="submit">Registrar</button>
 	   </div>
-	   <p><b>Já registrado? Faça o <a href="/login"> Login.</a></b></p>
+	   <p>Já registrado? Faça o <b><a href="/login"> Login.</a></b></p>
 	}
     </div>
 }

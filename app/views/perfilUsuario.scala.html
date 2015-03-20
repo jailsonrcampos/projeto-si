@@ -1,0 +1,40 @@
+@(title: String, usuario: Usuario)
+
+@main(title) {
+
+	<div class="col-sm-8">
+		<div class="tema-capa tema-default">
+			<div class="user-imagem col-xs-12 col-sm-4">
+			@if(usuario.getImagem == null) {
+				<img src="/assets/images/Icon-user.png" width="150" height="150" class="img-responsive img-thumbnail">
+			} else {
+				<img src="@usuario.getImagem()" width="150" height="150" class="img-responsive img-thumbnail">
+			}
+			</div>
+			<div class="user-space col-sm-8 hidden-xs"></div>
+			<div class="user-nome col-xs-12 col-sm-8"><h1>@usuario.getNome()</h1></div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+		
+		<p class="user-detalhes"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Email: @usuario.getEmail()
+		@if(usuario.getSobreMim() != null && !usuario.getSobreMim().equals("")) {
+		<br /><br />@usuario.getSobreMim()
+		}
+		</p>
+		
+		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Mensagens</h3>
+		  </div>
+		  <div class="panel-body">
+		    Nenhuma mensagem foi adicionada ainda.
+		  </div>
+		</div>
+		
+   	</div>
+   	<div class="col-sm-4">
+   	
+
+    </div>
+}

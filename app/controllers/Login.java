@@ -24,16 +24,17 @@ public class Login extends Controller {
 
 	@Transactional
     public static Result mostrarFormulario() {
-		if (session().get("usuario") != null) {
+		if (session().get("usuarioId") != null) {
 			return redirect("/");
 		}
-        return ok(login.render(loginForm, null));
+        return ok(login.render("Login | Portal do Leite SI1 - UFCG", loginForm));
     }
 	
 	@Transactional
 	public static Result logout() {
 		session().clear();
-		return redirect("/login");
+		flash("success", "Logout realizado com sucesso!");
+		return redirect("/");
 	}
     
 	@Transactional
@@ -43,16 +44,17 @@ public class Login extends Controller {
 		Usuario usuarioAutenticado = validarUsuario(usuarioAutenticar);
 
         if (loginForm.hasErrors() || usuarioAutenticado == null) {
-        	flash("fail", "Email ou Senha Inválidos");
-        	return ok(login.render(loginForm, null));
-        } else {
-            session().clear();
-            session("usuario", usuarioAutenticado.getEmail());
-            return redirect("/");
+        	flash("fail", "Email ou Senha Inválidos!");
+        	return redirect("/login");
         }
+        session().clear();
+        session("usuarioId", Long.toString(usuarioAutenticado.getId()));
+        session("usuarioNome", usuarioAutenticado.getNome());
+        return redirect("/");
     }
 	
 	private static Usuario validarUsuario(Usuario usuarioAutenticar) throws NoSuchAlgorithmException {
+		
 		List<Usuario> usuarios = dao.findByAttributeName("Usuario", "email", usuarioAutenticar.getEmail());
 		if (usuarios == null || usuarios.isEmpty()) {
 			return null;
