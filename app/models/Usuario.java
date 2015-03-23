@@ -1,17 +1,23 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity (name="Usuario")
 public class Usuario {
 	
 	@Id
+	@Column
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long Id;
+	private long id;
 	
 	@Column
 	private String nome;
@@ -23,6 +29,10 @@ public class Usuario {
 	private String imagem;
 	@Column
 	private String sobreMim;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn
+	private List<DicaOQueVocePrecisaSaber> dicas;
 	
 	public Usuario() {};
 	
@@ -73,14 +83,22 @@ public class Usuario {
 	}
 
 	public long getId() {
-		return Id;
+		return id;
+	}
+
+	public List<DicaOQueVocePrecisaSaber> getDicas() {
+		return dicas;
+	}
+
+	public void addDica(DicaOQueVocePrecisaSaber dica) {
+		this.dicas.add(dica);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (Id ^ (Id >>> 32));
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
@@ -91,12 +109,12 @@ public class Usuario {
 			return false;
 		}
 		Usuario temp = (Usuario) obj;
-		return this.email.equals(temp.getEmail()) && this.Id == temp.getId();
+		return this.email.equals(temp.getEmail()) && this.id == temp.getId();
 	}
 
 	@Override
 	public String toString() {
-		return nome + " (" + Id + ") <" + email + "> ";
+		return nome + " (" + id + ") <" + email + "> ";
 	}
 
 }

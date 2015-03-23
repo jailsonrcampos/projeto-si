@@ -28,7 +28,17 @@ POST	/usuario/alterar-senha			controllers.ContaUsuario.alterarSenhaUsuario()
 
 GET		/perfil/:id						controllers.ContaUsuario.mostrarPerfilUsuario(id: Long)
 
+# Dicas
+GET		/dicas/:id						controllers.Application.mostrarDicas(id: Long)
+GET		/dicas/:id/adicionar			controllers.Application.formularioAdicionarDica(id: Long)
+POST	/dicas/:id/adicionar			controllers.Application.adicionarDica(id: Long)
 
+# Dica
+GET		/dica/:id						controllers.Application.mostrarDica(id: Long)
+
+# Temas
+GET		/tema/:id/adicionar-dificuldade		controllers.Application.formularioAdicionarDificuldade(id: Long)
+POST	/tema/:id/adicionar-dificuldade		controllers.Application.adicionarDificuldade(id: Long)
 
 
 

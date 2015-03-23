@@ -1,0 +1,36 @@
+@(title: String, temas: List[Tema], dicaAtual: DicaOQueVocePrecisaSaber)
+
+@main(title) {
+
+	<div class="col-sm-8">
+	
+	@if(flash.contains("fail")) {
+   		<div class="alert alert-dismissible alert-danger">
+  			<button type="button" class="close" data-dismiss="alert">×</button>
+  			@flash.get("fail")
+		</div>
+   }
+   @if(flash.contains("success")) {
+		<div class="alert alert-dismissible alert-success">
+  			<button type="button" class="close" data-dismiss="alert">×</button>
+  			@flash.get("success")
+		</div>
+   }
+	
+		<h3>@dicaAtual.getNome()</h3>
+		<p>@dicaAtual.getDescricao()<p>
+			
+   </div>
+   <div class="col-sm-4">
+   		<h3 class="text-center">Temas de SI1</h3>
+   		<ul class="list-group">
+   		   @for(tema <- temas){
+		  <li class="list-group-item">
+		    <a href="/dicas/@tema.getId()">@tema.getNome()</a>
+		    <a href="/dicas/@tema.getId()/adicionar" title="Adicionar nova dica"><span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span></a>
+		  </li>
+		  }
+		</ul>
+   </div>
+
+}

@@ -109,7 +109,7 @@ public class ContaUsuario extends Controller {
 			return redirect("/usuario/alterar-senha");
 		}
 		
-		if(!md5.criptografarSenha(requestData.get("senha")).equals(usuarios.get(0).getSenha())) {
+		if(md5.criptografarSenha(requestData.get("senha")).equals(usuarios.get(0).getSenha())) {
 			flash("fail", "Escolha uma senha diferente da atual!");
 			return redirect("/usuario/alterar-senha");
 		}

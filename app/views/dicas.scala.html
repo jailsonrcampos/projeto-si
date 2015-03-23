@@ -1,0 +1,63 @@
+@(title: String, temas: List[Tema], temaAtual: Tema)
+
+@main(title) {
+
+	<div class="col-sm-8">
+	
+	@if(flash.contains("fail")) {
+   		<div class="alert alert-dismissible alert-danger">
+  			<button type="button" class="close" data-dismiss="alert">×</button>
+  			@flash.get("fail")
+		</div>
+   }
+   @if(flash.contains("success")) {
+		<div class="alert alert-dismissible alert-success">
+  			<button type="button" class="close" data-dismiss="alert">×</button>
+  			@flash.get("success")
+		</div>
+   }
+	
+		<h3>Dicas para o Tema: <b>@temaAtual.getNome()</b></h3>
+		@if(temaAtual.getMediaDificuldade() != null) {
+			<blockquote><b>Média da dificuldade:</b> @temaAtual.getMediaDificuldade()<br />
+			<b>Mediana da Dificuldade:</b> @temaAtual.getMedianaDificuldade()</blockquote>
+		}
+			<p><a href="/tema/@temaAtual.getId()/adicionar-dificuldade" title="Adicionar nova dificuldade ao Tema">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Avaliar dificuldade para o tema.</a><br />
+			<a href="/dicas/@temaAtual.getId()/adicionar" title="Adicionar nova dica"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar nova dica ao tema.</a><p><br />
+			<div class="list-group">
+			@for(dica <- temaAtual.getDicas()){
+			  <a href="/dica/@dica.getId()" class="list-group-item">
+			    <h4 class="list-group-item-heading">@dica.getNome()</h4>
+			    <p class="list-group-item-text text-minimal">
+			    	<span class="glyphicon glyphicon-user right-space" aria-hidden="true"></span>@dica.getUsuario().getNome()
+			    	<span class="glyphicon glyphicon-tags left-space right-space" aria-hidden="true"></span>@temaAtual.getNome()
+			    </p>
+			  </a>
+			  }
+			</div>
+
+			<center>
+			<ul class="pagination pagination-sm">
+			  <li class="active"><a href="#">1</a></li>
+			  <li><a href="#">2</a></li>
+			  <li><a href="#">3</a></li>
+			  <li><a href="#">4</a></li>
+			  <li><a href="#">5</a></li>
+			</ul>
+			</center>
+			
+   </div>
+   <div class="col-sm-4">
+   		<h3 class="text-center">Temas de SI1</h3>
+   		<ul class="list-group">
+   		   @for(tema <- temas){
+		  <li class="list-group-item">
+		    <a href="/dicas/@tema.getId()">@tema.getNome()</a>
+		    <a href="/dicas/@tema.getId()/adicionar" title="Adicionar nova dica"><span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span></a>
+		  </li>
+		  }
+		</ul>
+   </div>
+
+}

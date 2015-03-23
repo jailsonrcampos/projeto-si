@@ -1,0 +1,44 @@
+@(title: String, temas: List[Tema], tema: Tema)
+
+@main(title) {
+
+	<div class="col-sm-8">
+	
+	   @if(flash.contains("fail")) {
+	   		<div class="alert alert-dismissible alert-danger">
+	  			<button type="button" class="close" data-dismiss="alert">×</button>
+	  			@flash.get("fail")
+			</div>
+	   }
+	   @if(flash.contains("success")) {
+			<div class="alert alert-dismissible alert-success">
+	  			<button type="button" class="close" data-dismiss="alert">×</button>
+	  			@flash.get("success")
+			</div>
+	   }
+	
+		<h3 class="text-center">Adicionar Nova Dica</h3>
+			<form method="post" action="">
+			   	<p><br /><label for="nome">Nome</label></p>
+		       	<p><input type="text" name="nome" placeholder="Nome" class="form-control" value="" required="required"></p>
+		       	<p><br /><label for="sobre">Descrição</label></p>
+		       	<p><textarea name="descricao" rows="5" placeholder="Descrição" class="form-control"></textarea></p>
+		       	<div>
+			    	<button class="btn btn-primary btn-sm pull-right" type="submit">Adicionar</button>
+		       	</div>
+			</form>
+			
+   </div>
+   <div class="col-sm-4">
+   		<h3 class="text-center">Temas de SI1</h3>
+   		<ul class="list-group">
+   		   @for(tema <- temas){
+		  <li class="list-group-item">
+		    <a href="/dicas/@tema.getId()">@tema.getNome()</a>
+		    <a href="/dicas/@tema.getId()/adicionar" title="Adicionar nova dica"><span class="glyphicon glyphicon-plus pull-right" aria-hidden="true"></span></a>
+		  </li>
+		  }
+		</ul>
+   </div>
+
+}

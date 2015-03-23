@@ -3,6 +3,7 @@
 .conteudo {
 	margin-top: 80px;
 	min-height: 450px;
+	margin-botton: 30px;
 }
 
 .logomarca {
@@ -32,4 +33,16 @@
 
 .tema-cidade {
 	background-image: url("/assets/images/capa-cidade.jpg");
+}
+
+.left-space {
+	margin-left:10px;
+}
+
+.right-space {
+	margin-right:8px;
+}
+
+.text-minimal {
+	font-size: 12px;
 }
