@@ -3,6 +3,7 @@ package models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -16,18 +17,12 @@ public abstract class Dica {
 	
 	@Id
 	@Column
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	
-	//public abstract List<Concordancia> getConcordancias();
-
-	//public abstract void addConcordancia(Concordancia concordancia);
 	
 	public abstract void setInapropriado();
 	
 	public abstract boolean isInapropriado();
-	
-	// public abstract boolean isFechada();
 	
 	public Long getId() {
 		return id;

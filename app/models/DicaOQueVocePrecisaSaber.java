@@ -10,12 +10,7 @@ import javax.persistence.ManyToOne;
 
 
 @Entity (name="DicaOQueVocePrecisaSaber")
-public class DicaOQueVocePrecisaSaber {
-	
-	@Id
-	@Column
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+public class DicaOQueVocePrecisaSaber extends Dica {
 	
 	@Column
 	private String nome;
@@ -23,10 +18,6 @@ public class DicaOQueVocePrecisaSaber {
 	private String descricao;
 	@Column
 	private int inapropriado;
-	
-	//@OneToMany(cascade=CascadeType.ALL)
-    //@JoinColumn
-	//private List<Concordancia> concordancias;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Tema tema;
@@ -63,10 +54,6 @@ public class DicaOQueVocePrecisaSaber {
 		this.usuario = usuario;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -82,14 +69,6 @@ public class DicaOQueVocePrecisaSaber {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	//public List<Concordancia> getConcordancias() {
-	//	return concordancias;
-	//}
-
-	//public void addConcordancia(Concordancia concordancia) {
-	//	this.concordancias.add(concordancia);
-	//}
 	
 	public void setInapropriado() {
 		inapropriado++;
@@ -101,13 +80,6 @@ public class DicaOQueVocePrecisaSaber {
 		}
 		return false;
 	}
-	
-	//public boolean isFechada() {
-	//	if(concordancias.size() >= MAX_CONCORDANCIAS_OU_DISCORDANCIAS) {
-	//		return true;
-	//	}
-	//	return false;
-	//}
 
 }
 
